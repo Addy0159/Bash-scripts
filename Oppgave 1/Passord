@@ -3,3 +3,13 @@ read -p "Enter the desired password length: " length
 password=$(tr -dc 'a-zA-Za0-9!?%@=' < /dev/urandom | head -c "$length")
 
 echo "$password"
+
+read -p "Do you want to save the password? (yes/no): " save
+
+if [ "$save" = "yes" ]; then
+    echo "$password" > password.txt
+    ccrypt -e password.txt
+    echo "Password has been saved and encrypted in password.txt.cpt"
+else
+    echo "Password has not been saved."
+fi
