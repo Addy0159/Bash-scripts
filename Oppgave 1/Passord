@@ -1,0 +1,5 @@
+read -p "Enter the desired password length: " length
+
+password=$(tr -dc 'a-zA-Za0-9!?%@=' < /dev/urandom | head -c "$length")
+
+echo "$password"
