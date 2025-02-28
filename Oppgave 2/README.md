@@ -1,5 +1,6 @@
 # Bash-scripts
 Oppgave 2: Liste opp og sortere mapper 
+
  Lag et bash-script som tar banen (path) til en mappe som argument 
 
  Scriptet skal så liste opp alle filer og undermapper som ligger der, med 
