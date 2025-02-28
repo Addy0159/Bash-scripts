@@ -7,7 +7,7 @@ Skriv til fil:
  Bruker starter scriptet med argument ‘w’ 
 
  Brukeren blir promptet til å skrive hva som skal lagres til fil 
- 
+
  Brukeren blir bedt om å oppgi et navn på filen, filen lagres i mappen 
 terminalen kjører fra 
 
