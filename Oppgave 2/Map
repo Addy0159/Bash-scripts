@@ -1,19 +1,40 @@
 #!/bin/bash
 
-# Check if an argument is given
-if [ -z "$1" ]; then
-    echo "Usage: $0 <path>"
-    exit 1
+# Function to list files and directories
+display_contents() {
+    local folder="$1"
+    local sort_order="$2"
+    
+    echo "Contents of: $folder"
+    echo "--------------------------"
+    
+    if [[ "$sort_order" == "d" ]]; then
+        ls -r "$folder"
+    else
+        ls "$folder"
+    fi
+    
+    echo ""
+}
+
+# Default folders to process
+default_folders=("$HOME/Documents" "$HOME/Downloads" "$HOME/Music" "$HOME/Pictures" "$HOME/Public" "$HOME/snap" "$HOME/Templates" "$HOME/Videos")
+
+# Check if the first argument is a sorting option
+sort_order="a"
+if [[ "$1" == "a" || "$1" == "d" ]]; then
+    sort_order="$1"
+    shift
 fi
 
-# Check if the argument is a valid directory
-if [ ! -d "$1" ]; then
-    echo "Error: $1 is not a valid directory"
-    exit 1
-fi
+# Use default folders if no arguments are provided
+folders=("${@:-${default_folders[@]}}")
 
-# Print the name of the original directory
-echo "Contents of the directory $1:"
-
-# Print the contents of the directory
-ls -l "$1"
+# Iterate through the given folders
+for folder in "${folders[@]}"; do
+    if [ -d "$folder" ]; then
+        display_contents "$folder" "$sort_order"
+    else
+        echo "Error: '$folder' is not a valid directory."
+    fi
+done
