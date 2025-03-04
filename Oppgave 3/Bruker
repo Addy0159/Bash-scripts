@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Function to write to a file
+write_to_file() {
+    echo "Enter the text to save to the file:"
+    read user_text
+    
+    echo "Enter the filename (including .txt extension):"
+    read filename
+    
+    directory="$HOME/Documents"
+    mkdir -p "$directory"
+    filepath="$directory/$filename"
+    
+    echo "$user_text" > "$filepath"
+    echo "File saved at: $filepath"
+}
+
+# Function to read from a file
+read_from_file() {
+    filepath="$HOME/Documents/$1"
+    if [[ -f "$filepath" ]]; then
+        echo "Contents of $filepath:"
+        cat "$filepath"
+    else
+        echo "Error: File '$filepath' does not exist."
+    fi
+}
+
+# Main script logic
+if [[ "$1" == "w" ]]; then
+    write_to_file
+elif [[ "$1" == "r" && -n "$2" ]]; then
+    read_from_file "$2"
+else
+    echo "Usage: $0 w (to write) | $0 r <filename> (to read from Documents folder)"
+    exit 1
+fi
